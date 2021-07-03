@@ -29,6 +29,32 @@ section.has-dark-background, section.has-dark-background h1, section.has-dark-ba
   background-image: url('../../img/backpic.png');
 }
 
+.tg .tg-baqh {
+  text-align:center;vertical-align:top
+}
+
+.tg .tg-rh{
+  font-weight: bold;
+}
+
+.wave{
+  display: inline-block;
+  margin: 10px;
+  padding: 10px;
+  text-align: center;
+  left: 50%;
+  top: 50%;
+  vertical-align: middle;
+
+}
+
+
+.owaves{
+  width: 100%;
+  text-align: center;
+  display:inline-block;
+}
+
 /*********************************************
  * GLOBAL STYLES
  *********************************************/
