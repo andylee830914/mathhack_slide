@@ -4,7 +4,7 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>reveal.js</title>
+		<title>吹直笛打電話？重現柯南名場景！ - PyConTW 21</title>
 
 		<link rel="stylesheet" href="dist/reset.css">
 		<link rel="stylesheet" href="dist/reveal.css">
@@ -16,13 +16,11 @@
 	<body>
 		<div class="reveal">
 			<div class="slides">
-				<section style="text-align: left; top: 230px; display: block;">
-					<h3>吹直笛打電話？重現柯南名場景！</h3>
+				<section >
+					<h3 style="margin-left:-3.5em">吹直笛打電話？</h3><br><h3 style="padding-left:3.5em;margin-top: -50px;">重現柯南名場景！</h3>
 					<br>
 					<br>
-					<br>
-					<p>Yu-Hsun Lee</p>
-					<p>@PyCon TW 2021</p>
+					<p>Yu-Hsun Lee </p><sub>@PyConTW 2021</sub>
 				</section>
 				<section data-background-image="https://vbmspic.video.friday.tw/STILL/13100/13100_13124698_M.jpg" data-background-opacity="0.3">
 					<img width="750px" src="https://vbmspic.video.friday.tw/STILL/13100/13100_13124698_M.jpg"></img>
@@ -139,6 +137,101 @@
 				<section>
 					<h3>傅立葉轉換</h3>
 					<sup>Fourier Transform</sup>
+				</section>
+				<section>
+					<h3>頻譜分析</h3>
+				</section>
+				<section>
+					<h3>解碼</h3>
+				</section>
+				<section>
+					<h3>硬體介紹與控制</h3>
+				</section>
+				<section>
+					<h5>流程架構</h5>
+					<div class="wave wp1 fragment" data-fragment-index="1">
+						<img height="120px" src="img/sin1p2.png"></img>
+						<p>聲音訊號</p>
+					</div>
+					<div class="wave wp1 fragment" data-fragment-index="2">
+						<img height="120px" src="img/rasp.png"></img>
+						<p>樹莓派+USB音效卡</p>
+					</div>
+					<div class="wave wp1 fragment" data-fragment-index="3">
+						<img height="80px" src="img/relay.png"></img>
+						<p>繼電器模組</p>
+					</div>
+					<div class="wave wp1 fragment" data-fragment-index="4">
+						<img height="100px" src="img/eleclock.png"></img>
+						<p>電控鎖</p>
+					</div>
+				</section>
+				<section>
+					<h5>電控鎖</h5>
+					<div class="wave wp1" data-fragment-index="4">
+						<img height="300px" src="img/eleclock2.png"></img>
+						<p>陽極鎖（通電鎖門）</p>
+					</div>
+					<div class="wave wp1" data-fragment-index="4">
+						<img height="300px" src="img/eleclock1.png"></img>
+						<p>陰極鎖（通電開門）</p>
+					</div>
+				</section>
+				<section data-transition="fade">
+					<h5>繼電器模組</h5>
+					<div class="wave wp1 " data-fragment-index="1">
+						<img height="300px" src="img/relay1.png"></img>
+					</div>
+				</section>
+				<section data-transition="fade">
+					<h5>繼電器模組</h5>
+					<div class="wave wp1" data-fragment-index="1">
+						<img height="300px" src="img/relay_circuit.png"></img>
+					</div>
+				</section>
+				
+				<section data-transition="fade">
+					<h5>繼電器模組</h5>
+					<div class="wave wp1" data-fragment-index="1">
+						<img height="300px" src="img/relay_low.png"></img>
+					</div>
+				</section>
+				<section data-transition="fade">
+					<h5>繼電器模組</h5>
+					<div class="wave wp1" data-fragment-index="1">
+						<img height="300px" src="img/relay_high.png"></img>
+					</div>
+				</section>
+				<section>
+					<h5>組裝電路</h5>
+					<div class="wave wp1" data-fragment-index="1">
+						<img height="300px" src="img/connection.png"></img>
+					</div>
+				</section>
+				<section>
+					<h5 >Example Code</h5>
+					<pre><code data-trim data-noescape>
+					import pigpio
+
+					relay = 23 # GPIO
+
+					pi = pigpio.pi() # Access the local Pi's GPIO
+					pi.set_mode(relay, pigpio.OUTPUT) # Set GPIO to output mode
+
+					pi.write(relay, 0) # LOW, Door Locked
+					pi.write(relay, 1) # HIGH, Door Unlocked
+					  </code></pre>
+				</section>
+				<section>
+					<h3 style="font-style: italic;">Demo</h3>
+				</section>
+				<section data-background-image="img/phone_all.jpg"></section>
+				<!-- <section data-background-image="img/phone_recorder.jpg">
+				
+				</section> -->
+				<section data-background-image="img/phone_play.jpg"></section>
+				<section>
+					<h3 >Q&A</h3>
 				</section>
 			</div>
 		</div>
