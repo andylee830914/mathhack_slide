@@ -16,14 +16,32 @@
                 console.log('connected'); 
             });
         </script>
-        
+        <style>
+            .controlbox{
+                position: absolute;
+                border-radius: 3px;
+                top: 15px;
+                left: 50px;
+                width:50px;
+                height:50px;
+                font-family: sans-serif;
+                color: #744c29;
+                font-size: 2em;
+                /* display: none; */
+            }
+        </style>
     </head>
     
     <body>
-        <div class="chart-container" style="position: relative; height:100%; width:100%">
+        <div class="controlbox position-fixed">
+           <h1 id="decode"></h1>
+        </div>
+        <div class="chart-container" style="position: relative; height:100%; width:100%;bottom: 0px;">
             <canvas id="chart"></canvas>
         </div>
         <script>
+            const queryString = window.location.search;
+            const urlParams = new URLSearchParams(queryString);
             var data= {
                     labels: [],
                     datasets: [{
@@ -32,19 +50,26 @@
                         borderColor: 'rgb(75, 192, 192)',
                         tension: 0.1,
                         fill: true,
-                        backgroundColor : 'rgb(75, 192, 192,0.2)'
+                        backgroundColor : 'rgb(75, 192, 192,1)'
                     }]
                 };
             socket.on("spectrum", data => {
-                    console.log(data);
+                    // console.log(data);
                     myChart.data.labels = data['x'];
                     myChart.data.datasets[0].data = data['y'];
+                    var x = document.getElementById("decode");
+
+                    if (data['key']!='NULL' && urlParams.has("decode")) {
+                        x.innerText = data['key'];
+                    }else{
+                        x.innerText = "";
+                    }
                     myChart.update();
 
                 });
 
             const config = {
-                type: 'line',
+                type: 'bar',
                 data: data,
                 options:{
                     plugins:{
