@@ -145,60 +145,61 @@
 					<h3>傅立葉轉換</h3>
 					<sup>Fourier Transform</sup>
 				</section>
-				<section data-background-iframe="http://127.0.0.1:5500/freq.html" data-background-interactive>
+				<section data-background-iframe="freq.html" data-background-interactive>
 					<br><br><br><br><br><br><br><br><br><br><br><br><h5>頻譜分析</h5>
 					<!-- <iframe data-src= style="width:80%;height:60%"></iframe> -->
 				</section>
 				<section>
 					<h5>Example Code - PyAudio</h5>
-					<pre><code data-trim data-noescape>
-					import pyaudio
-					pa = pyaudio.PyAudio()
-					stream = pa.open(format=pyaudio.paInt16,
-													 channels=1,
-													 rate=44100,
-													 input_device_index=INPUT_DEVICE_INDEX,
-													 input=True,
-													 output=False,
-													 frames_per_buffer=8192)
-					while True:
-							ret = stream.read(8192, exception_on_overflow=False)
-							ret = np.frombuffer(ret, dtype = np.int16)
-							spec_x = np.fft.fftfreq(8192, d = 1.0 / 44100 )
-							spec_y = np.abs(np.fft.fft(ret))
+					<pre><code data-trim data-noescape  class="python">
+import pyaudio
+import numpy as np
+pa = pyaudio.PyAudio()
+stream = pa.open(format = pyaudio.paInt16,
+                 channels = 1,
+                 rate = 44100,
+                 input_device_index = INPUT_DEVICE_INDEX,
+                 input = True,
+                 output = False,
+                 frames_per_buffer = 8192)
+while True:
+    ret = stream.read(8192, exception_on_overflow = False)
+    ret = np.frombuffer(ret, dtype = np.int16)
+    spec_x = np.fft.fftfreq(8192, d = 1.0 / 44100 )
+    spec_y = np.abs(np.fft.fft(ret))
 					  </code></pre>
 				</section>
 				<section>
 					<h5>Example Code - Peak Finding</h5>
 					<pre><code data-trim data-noescape class="python">
-						def findfreq(spec_x,spec_y):
-								kidx = np.abs(spec_x - 1000).argmin()
-								index1 = np.argmax(spec_y[:kidx])
-								index2 = np.argmax(spec_y[kidx:int(self.N / 2)]) + kidx
-								return (spec_x[index1], spec_x[index2])
+def findfreq(spec_x,spec_y):
+    kidx = np.abs(spec_x - 1000).argmin()
+    index1 = np.argmax(spec_y[:kidx])
+    index2 = np.argmax(spec_y[kidx:4096]) + kidx
+    return (spec_x[index1], spec_x[index2])
 					</code></pre>
 				</section>
 				<section>
 					<h5>Example Code - DTMF Decode</h5>
 					<pre><code data-trim data-noescape class="python">
-						def dtmf(freq1, freq2):
-								keypad = [["1", "2", "3", "A"],
-													["4", "5", "6", "B"],
-													["7", "8", "9", "C"],
-													["*", "0", "#", "D"]]
-								row = np.array([697, 770, 852, 941])			
-								col = np.array([1209, 1336, 1477, 1633])
-								ridx = np.where(np.abs(row - freq1) < 25)[0]
-								cidx = np.where(np.abs(col - freq2) < 25)[0]
-								try: 
-										k = keypad[ridx[0]][cidx[0]]
-								except: 
-										k = None 
-								return k
+def dtmf(freq1, freq2):
+    keypad = [["1", "2", "3", "A"],
+              ["4", "5", "6", "B"],
+              ["7", "8", "9", "C"],
+              ["*", "0", "#", "D"]]
+    row = np.array([697, 770, 852, 941])			
+    col = np.array([1209, 1336, 1477, 1633])
+    ridx = np.where(np.abs(row - freq1) < 25)[0]
+    cidx = np.where(np.abs(col - freq2) < 25)[0]
+    try: 
+        k = keypad[ridx[0]][cidx[0]]
+    except: 
+        k = None 
+    return k
 					</code>
 					
 				</section>
-				<section data-background-iframe="http://127.0.0.1:5500/freq.html?decode=1" data-background-interactive>
+				<section data-background-iframe="freq.html?decode=1" data-background-interactive>
 					<br><br><br><br><br><br><br><br><br><br><br><br>
 					<h5>頻譜分析（解碼中）</h5>
 					<!-- <iframe data-src= style="width:80%;height:60%"></iframe> -->
@@ -284,6 +285,16 @@
 				<section>
 					<h3 style="font-style: italic;">Demo</h3>
 				</section>
+                <section data-transition="fade-out">
+                    <div class="container">
+                        <img width="500px" src="img/gps.png" style="border: 2px solid #555;"></img>
+                    </div>
+                </section>
+                <section data-transition="fade-out">
+                    <div class="container">
+                        <img width="500px" src="img/gps_sol.png" style="border: 2px solid #555;"></img>
+                    </div>
+                </section>
 				<section data-background-image="img/phone_all.jpg"></section>
 				<!-- <section data-background-image="img/phone_recorder.jpg">
 				
