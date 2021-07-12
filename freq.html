@@ -12,6 +12,8 @@
         <script src="https://cdn.jsdelivr.net/npm/chart.js@3.4.1/dist/chart.min.js"></script>
         <script>
             const socket = io("http://127.0.0.1:8080");
+            var demo_data;
+            var demo_dtmf;
             socket.on("connect", () => {
                 console.log('connected'); 
             });
@@ -67,6 +69,37 @@
                     myChart.update();
 
                 });
+                
+            if (socket.disconnected) {
+                var x = document.getElementById("decode");
+
+                if (data['key'] != 'NULL' && urlParams.has("decode")) {
+                    fetch('dist/data/dtmf1.json')
+                        .then(response => response.json())
+                        .then(mdata => {
+                            demo_dtmf = mdata;
+                            data.datasets[0].data = demo_dtmf['y'];
+                            data.labels = demo_dtmf['x'];
+                            console.log(data)
+                            x.innerText = demo_dtmf['key'];
+                            myChart.update();
+                        });
+                    
+                } else {
+                    fetch('dist/data/data.json')
+                        .then(response => response.json())
+                        .then(mdata => {
+                            demo_data = mdata;
+                            data.datasets[0].data = demo_data['y'];
+                            data.labels = demo_data['x'];
+                            console.log(data)
+                            x.innerText = "";
+                            myChart.update();
+                        });
+                    
+                }
+ 
+            }
 
             const config = {
                 type: 'bar',
