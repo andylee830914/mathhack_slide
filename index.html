@@ -17,10 +17,15 @@
 		<div class="reveal">
 			<div class="slides">
 				<section >
-					<h3 style="margin-left:-3.5em">吹直笛打電話？</h3><br><h3 style="padding-left:3.5em;margin-top: -50px;">重現柯南名場景！</h3>
-					<br>
-					<br>
-					<p>Yu-Hsun Lee </p><sub>@PyConTW 2021</sub>
+					<div class="titlepage">
+						<br><br>
+						<h3 style="margin-left:-3.5em">吹直笛打電話？</h3><br>
+						<h3 style="padding-left:3.5em;margin-top: -50px;">重現柯南名場景！</h3>
+						<br>
+						<p>Yu-Hsun Lee <br><sub>@PyConTW 2021</sub></p>
+					</div>
+
+					
 				</section>
 				<section data-background-image="https://vbmspic.video.friday.tw/STILL/13100/13100_13124698_M.jpg" data-background-opacity="0.3">
 					<img width="750px" src="https://vbmspic.video.friday.tw/STILL/13100/13100_13124698_M.jpg"></img>
@@ -34,7 +39,7 @@
 				<section data-background-image="img/intro.png" data-transition-speed="slow">
 				</section>
 				<section>
-					<div class="container" >
+					<div class="container mh-message" >
 						<!-- <div class="content"> -->
 							<p class="fragment" data-fragment-index="1">你們似乎已經抵達出⼝附近，但是依然有碎石擋住，</p>
 							<p class="fragment" data-fragment-index="2">確認你們的位置後，調查團會⽤⼯具打通⼀條通路，</p>
@@ -103,29 +108,35 @@
 				</section>
 				<section>
 					<div class="owaves">
-						<div class="wave w1 fragment" data-fragment-index="1">
+						<div class="wave w1 fragment" data-fragment-index="1" onclick="play('audio_low')">
 							<img height="100px" src="img/sin1.png"></img>
+							<audio id="audio_low" src="audio/1_low.m4a"></audio>
 							<h5>低頻</h5>
 						</div>
 						<div class="wave wp fragment" data-fragment-index="2">
 							<img height="40px" src="img/plus.png"></img>
 						</div>
-						<div class="wave w2 fragment" data-fragment-index="2">
+						<div class="wave w2 fragment" data-fragment-index="2" onclick="play('audio_high')">
 							<img height="100px" src="img/sin2.png"></img>
+							<audio id="audio_high" src="audio/1_high.m4a"></audio>
 							<h5>高頻</h5>
 						</div>
 						<div class="wave we fragment" data-fragment-index="3">
 							<img height="13px" src="img/equal.png"></img>
 						</div>
-						<div class="wave wp1 fragment" data-fragment-index="3">
+						<div class="wave wp1 fragment" data-fragment-index="3" onclick="play('audio_tone')">
 							<img height="160px" src="img/sin1p2.png"></img>
+							<audio id="audio_tone" src="audio/1_tone.m4a"></audio>
+
 						</div>
 					</div>
 				</section>
 				<section>
 					<div class="owaves">
-						<div class="wave wp1" data-fragment-index="1">
+						<div class="wave wp1" data-fragment-index="1" onclick="play('audio_tone')">
 							<img height="160px" src="img/sin1p2.png"></img>
+							<audio id="audio_tone" src="audio/1_tone.m4a"></audio>
+
 						</div>
 						<div class="wave we fragment" data-fragment-index="2">
 							<img height="13px" src="img/equal.png"></img>
@@ -316,10 +327,17 @@ def dtmf(freq1, freq2):
 			// - https://revealjs.com/config/
 			Reveal.initialize({
 				hash: true,
+				progress: false,
 
 				// Learn about plugins: https://revealjs.com/plugins/
 				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
 			});
+		</script>
+		<script>
+			function play(id) {
+				var audio = document.getElementById(id);
+				audio.play();
+			}
 		</script>
 	</body>
 </html>
