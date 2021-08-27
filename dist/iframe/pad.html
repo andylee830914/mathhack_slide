@@ -1,0 +1,65 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
+        crossorigin="anonymous"></script>
+    <title>KeyPad</title>
+    <style>
+        body {
+            background:none transparent;
+        }   
+    </style>
+
+</head>
+
+<body>
+    <div class="container">
+        <div class="keypad">
+        <div class="row">
+            <button type="button" class="btn btn-outline-secondary col-3" onclick="play('audio_1')">1</button>
+            <button type="button" class="btn btn-outline-secondary col-3" onclick="play('audio_2')">2</button>
+            <button type="button" class="btn btn-outline-secondary col-3" onclick="play('audio_3')">3</button>
+        </div>
+        <div class="row">
+            <button type="button" class="btn btn-outline-secondary col-3" onclick="play('audio_4')">4</button>
+            <button type="button" class="btn btn-outline-secondary col-3" onclick="play('audio_5')">5</button>
+            <button type="button" class="btn btn-outline-secondary col-3" onclick="play('audio_6')">6</button>
+        </div>
+        <div class="row">
+            <button type="button" class="btn btn-outline-secondary col-3" onclick="play('audio_7')">7</button>
+            <button type="button" class="btn btn-outline-secondary col-3" onclick="play('audio_8')">8</button>
+            <button type="button" class="btn btn-outline-secondary col-3" onclick="play('audio_9')">9</button>
+        </div>
+        <div class="row">
+            <button type="button" class="btn btn-outline-secondary col-3" onclick="play('audio_*')">*</button>
+            <button type="button" class="btn btn-outline-secondary col-3" onclick="play('audio_0')">0</button>
+            <button type="button" class="btn btn-outline-secondary col-3" onclick="play('audio_#')">#</button>
+        </div>
+        </div>
+    </div>
+    <audio id="audio_1" src="../audio/1_tone.m4a"></audio>
+    <audio id="audio_2" src="../audio/2_tone.m4a"></audio>
+    <audio id="audio_3" src="../audio/3_tone.m4a"></audio>
+    <audio id="audio_4" src="../audio/4_tone.m4a"></audio>
+    <audio id="audio_5" src="../audio/5_tone.m4a"></audio>
+    <audio id="audio_6" src="../audio/6_tone.m4a"></audio>
+    <audio id="audio_7" src="../audio/7_tone.m4a"></audio>
+    <audio id="audio_8" src="../audio/8_tone.m4a"></audio>
+    <audio id="audio_9" src="../audio/9_tone.m4a"></audio>
+    <audio id="audio_*" src="../audio/st_tone.m4a"></audio>
+    <audio id="audio_0" src="../audio/0_tone.m4a"></audio>
+    <audio id="audio_#" src="../audio/sh_tone.m4a"></audio>
+</body>
+<script>
+    function play(id) {
+        var audio = document.getElementById(id);
+        audio.play();
+    }
+</script>
+</html>

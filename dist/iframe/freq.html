@@ -31,12 +31,29 @@
                 font-size: 2em;
                 /* display: none; */
             }
+            .keypad{
+                position: absolute;
+                border-radius: 3px;
+                top: 50px;
+                right: 0px;
+                font-family: sans-serif;
+                color: #744c29;
+                font-size: 2em;
+                z-index: 10;
+                /* display: none; */
+            }
+            .keypad iframe{
+                background:none transparent;
+            }
         </style>
     </head>
     
     <body>
         <div class="controlbox position-fixed">
            <h1 id="decode"></h1>
+        </div>
+        <div class="keypad position-fixed" id="keypad">
+            <iframe src="pad.html" allowtransparency="true" frameBorder="0" width="200" height="200"></iframe>
         </div>
         <div class="chart-container" style="position: relative; height:100%; width:100%;bottom: 0px;">
             <canvas id="chart"></canvas>
@@ -74,7 +91,7 @@
                 var x = document.getElementById("decode");
 
                 if (data['key'] != 'NULL' && urlParams.has("decode")) {
-                    fetch('dist/data/dtmf1.json')
+                    fetch('../data/dtmf1.json')
                         .then(response => response.json())
                         .then(mdata => {
                             demo_dtmf = mdata;
@@ -86,7 +103,7 @@
                         });
                     
                 } else {
-                    fetch('dist/data/data.json')
+                    fetch('../data/data.json')
                         .then(response => response.json())
                         .then(mdata => {
                             demo_data = mdata;
@@ -97,6 +114,11 @@
                             myChart.update();
                         });
                     
+                }
+
+                if(!urlParams.has("keypad")){
+                    var x = document.getElementById("keypad");
+                    x.style.display = 'none';
                 }
  
             }
